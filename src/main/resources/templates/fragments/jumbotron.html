@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section th:fragment="jumbotron">
+    <div class="container text-center my-5">
+
+      <h1>WELCOME TO ANIME DB</h1>
+      <img th:src="@{/img/dragon-ball.jpg}" alt="logo image" class="py-3 w-75 rounded-5">
+      <h2>
+        Welcome to the backoffice management panel! Here you can manage and monitor data related to anime and
+        platforms.
+        Use the navigation menu to access management features, such as creating, editing, or deleting content. Happy
+        working!
+      </h2>
+
+    </div>
+  </section>
+  <!-- JUMBOTRON -->
+
+</body>
+
+</html>

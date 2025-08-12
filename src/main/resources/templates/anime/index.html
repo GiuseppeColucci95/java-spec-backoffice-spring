@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <title>Anime</title>
+  <th:block th:insert="~{fragments/bootstrap :: bootstrap}"></th:block>
+  <!-- BOOTSTRAP STYLE -->
+</head>
+
+<body>
+
+  <th:block th:replace="~{fragments/header :: header}"></th:block>
+  <!-- HEADER -->
+
+  <main>
+
+    <th:block th:replace="~{fragments/anime-list :: animeList}"></th:block>
+    <!-- ANIME LIST -->
+
+  </main>
+  <!-- MAIN -->
+
+  <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+  <!-- FOOTER -->
+
+  <th:block th:replace="~{fragments/bootstrap :: bootstrapJs}"></th:block>
+  <!-- BOOTSTRAP SCRIPT -->
+
+</body>
+
+</html>

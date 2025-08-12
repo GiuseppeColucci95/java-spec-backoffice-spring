@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section th:fragment="anime-form" class="my-5">
+    <div class="container">
+
+      <form th:action="${edit} ? @{/anime/{id}/edit(id=*{id})} : @{/anime/create}" method="post" th:object="${anime}">
+
+        <h1 th:if="${edit}" class="text-center">EDITING [[*{title.toUpperCase()}]]</h1>
+        <h1 th:unless="${edit}" class="text-center">INSERT YOUR NEW ANIME HERE</h1>
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" th:field="*{title}" th:errorClass="is-invalid" name="title" id="title"
+            placeholder="Insert anime title here..." class="form-control">
+          <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+            <ul>
+              <li th:each="error: ${#fields.errors('title')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+        <!-- title -->
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Platforms</label>
+
+          <div class="card p-2">
+
+            <div class="row">
+              <div class="col-3" th:each="platform : ${platforms}">
+                <input type="checkbox" th:id="|platform-${platform.id}|" th:field="${anime.platforms}"
+                  th:value="${platform.id}">
+                <label th:for="|platform-${platform.id}|" class="form-check-label" th:text="${platform.name}"></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- platforms available -->
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea rows="5" type="text" th:field="*{description}" th:errorClass="is-invalid" name="description"
+            id="description" placeholder="Insert anime description here..." class="form-control">
+          </textarea>
+          <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+            <ul>
+              <li th:each="error: ${#fields.errors('description')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+        <!-- description -->
+
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">Image url</label>
+          <input type="text" th:field="*{imageUrl}" th:errorClass="is-invalid" name="imageUrl" id="imageUrl"
+            placeholder="https://picsum.photos/600/400" class="form-control">
+          <div th:if="${#fields.hasErrors('imageUrl')}" class="invalid-feedback">
+            <ul>
+              <li th:each="error: ${#fields.errors('imageUrl')}" th:text="${error}"></li>
+            </ul>
+          </div>
+        </div>
+        <!-- image url -->
+
+        <div class="row mb-3">
+
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="releaseDate" class="form-label">Release Date</label>
+              <input type="date" th:field="*{releaseDate}" th:errorClass="is-invalid" name="releaseDate"
+                id="releaseDate" class="form-control">
+              <div th:if="${#fields.hasErrors('releaseDate')}" class="invalid-feedback">
+                <ul>
+                  <li th:each="error: ${#fields.errors('releaseDate')}" th:text="${error}"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- release date -->
+
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="numberOfEpisodes" class="form-label">Number of episodes</label>
+              <input type="number" min="1" th:field="*{numberOfEpisodes}" th:errorClass="is-invalid"
+                name="numberOfEpisodes" id="numberOfEpisodes" class="form-control">
+              <div th:if="${#fields.hasErrors('numberOfEpisodes')}" class="invalid-feedback">
+                <ul>
+                  <li th:each="error: ${#fields.errors('numberOfEpisodes')}" th:text="${error}"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- number of episodes -->
+
+        </div>
+        <!-- release date and number of episodes -->
+
+        <div class="mb-3 d-flex justify-content-between">
+          <input type="submit" class="btn btn-warning" value="Save">
+          <input type="reset" class="btn btn-danger" value="Reset all fields">
+        </div>
+        <!-- save and reset buttons -->
+
+      </form>
+      <!-- form -->
+
+    </div>
+  </section>
+  <!-- FORM -->
+
+</body>
+
+</html>

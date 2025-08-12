@@ -1,0 +1,47 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Anime details</title>
+</head>
+
+<body>
+
+  <section th:fragment="anime-details" id="anime-details" class="mt-5" th:object="${anime}">
+
+    <div class="container ">
+
+      <h1 class="text-center fw-bold fs-1 mb-5">ANIME DETAILS PAGE</h1>
+
+      <div class="row">
+        <div class="col-5">
+          <img class="w-100 rounded-5 show-img"
+            th:src="${#strings.startsWith(anime.imageUrl, 'http') ? anime.imageUrl : '/img/' + anime.imageUrl}"
+            alt="anime image">
+        </div>
+        <div class="col-7">
+          <h1>[[*{title}]]</h1>
+          <p>[[*{description}]]</p>
+          <h5><strong>Release date: </strong>[[*{releaseDate}]]</h5>
+          <h5><strong>Number of episodes: </strong>[[*{numberOfEpisodes}]]</h5>
+          <h5 class="d-flex align-items-center">
+            <strong>Available on: </strong>
+            <ul class="list-inline mb-0 ms-2">
+              <li class="list-inline-item" th:each="platform : *{platforms}">
+                <span th:text="${platform.name}" class="badge rounded-pill"
+                  th:style="'background-color: ' + ${platform.badgeColor}"></span>
+              </li>
+            </ul>
+          </h5>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ANIME DETAILS -->
+
+</body>
+
+</html>

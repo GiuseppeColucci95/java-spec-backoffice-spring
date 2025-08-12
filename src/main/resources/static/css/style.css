@@ -1,0 +1,8 @@
+main {
+  min-height: calc(100vh - 196px);
+}
+
+.show-img {
+  height: 350px;
+  object-fit: cover;
+}

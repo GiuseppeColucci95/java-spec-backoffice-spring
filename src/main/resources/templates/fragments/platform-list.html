@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Platforms</title>
+</head>
+
+<body>
+
+  <section th:fragment="platformList" id="platformList" class="mt-5">
+
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="m-0 p-0">PLATFORMS LIST</h1>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{platforms/create}" class="btn btn-warning me-4">Insert new
+          Platform</a>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th class="text-end"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="platform : ${platforms}" th:object="${platform}">
+            <td>[[*{id}]]</td>
+            <td>[[*{name}]]</td>
+            <td>
+              <div th:style="'background-color: ' + *{badgeColor}" class="d-inline px-3 py-1 rounded-3">
+                [[*{badgeColor}]]
+              </div>
+            </td>
+            <td width="190">
+              <a th:href="@{/platforms/{id}(id=*{id})}" class="btn btn-sm btn-primary">Show</a>
+              <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/platforms/{id}/edit(id=*{id})}"
+                class="btn btn-sm btn-warning">Edit</a>
+
+              <button sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm btn-danger" type="button"
+                data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + *{id}">
+                Delete
+              </button>
+              <!-- button for modal -->
+              <div class="modal fade" th:id="'delete-modal-' + *{id}" tabindex="-1" aria-labelledby="delete-modal"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Deleting [[*{name}]]
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete: "[[*{name}]]"?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <form th:action="@{platforms/delete/{id}(id=*{id})}" class="d-inline-block" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- modal -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- table -->
+
+      <h1 th:unless="${platforms.size()>0}" class="text-center">No platforms found!💔</h1>
+      <!-- message for no platforms -->
+
+    </div>
+
+  </section>
+  <!-- ANIME LIST -->
+
+</body>
+
+</html>

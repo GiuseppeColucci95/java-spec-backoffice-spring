@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns:th='http://www.thymeleaf.org'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section th:fragment="platform-details" id="platform-details" class="mt-5" th:object="${platform}">
+
+    <div class="container text-center">
+
+      <h1 class="text-center fw-bold fs-1 mb-5">PLATFORM DETAILS PAGE</h1>
+
+      <h3>Platform name: <strong>[[*{name}]]</strong></h3>
+      <h4>Color:
+        <div th:style="'background-color: ' + *{badgeColor}" class="d-inline px-2 py-1 rounded-3">
+          <strong>[[*{badgeColor}]]</strong>
+        </div>
+      </h4>
+
+    </div>
+
+  </section>
+  <!-- PLATFORM DETAILS -->
+
+</body>
+
+</html>
