@@ -8,6 +8,7 @@ import org.lessons.java.project.java_spec_backoffice_spring.service.AnimeService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class AnimeRestAdvancedController {
   private AnimeService animeService;
 
   @GetMapping
+  @CrossOrigin(origins = "http://localhost:5173")
   public List<Anime> index() {
 
     List<Anime> anime = animeService.findAll();
@@ -35,12 +37,14 @@ public class AnimeRestAdvancedController {
   }
 
   @GetMapping("/search")
+  @CrossOrigin(origins = "http://localhost:5173")
   public List<Anime> index(@Valid @RequestParam String query) {
 
     return animeService.findByTitle(query);
   }
 
   @GetMapping("/{id}")
+  @CrossOrigin(origins = "http://localhost:5173")
   public ResponseEntity<Anime> show(@Valid @PathVariable Integer id) {
 
     Optional<Anime> animeAttempt = animeService.findById(id);

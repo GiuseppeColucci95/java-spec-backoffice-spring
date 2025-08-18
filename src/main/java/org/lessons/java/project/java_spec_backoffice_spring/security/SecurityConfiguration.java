@@ -25,6 +25,7 @@ public class SecurityConfiguration {
         .requestMatchers("/anime", "/anime/**").hasAnyAuthority("USER", "ADMIN")
         .requestMatchers("/**").permitAll())
         .formLogin(org.springframework.security.config.Customizer.withDefaults())
+        .cors(cors -> cors.disable())
         .csrf(csfr -> csfr.disable());
 
     return http.build();
