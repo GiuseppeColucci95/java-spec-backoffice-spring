@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/anime")
 public class AnimeRestAdvancedController {
 
@@ -29,7 +30,6 @@ public class AnimeRestAdvancedController {
   private AnimeService animeService;
 
   @GetMapping
-  @CrossOrigin(origins = "http://localhost:5173")
   public List<Anime> index() {
 
     List<Anime> anime = animeService.findAll();
@@ -37,14 +37,12 @@ public class AnimeRestAdvancedController {
   }
 
   @GetMapping("/search")
-  @CrossOrigin(origins = "http://localhost:5173")
   public List<Anime> index(@Valid @RequestParam String query) {
 
     return animeService.findByTitle(query);
   }
 
   @GetMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:5173")
   public ResponseEntity<Anime> show(@Valid @PathVariable Integer id) {
 
     Optional<Anime> animeAttempt = animeService.findById(id);
