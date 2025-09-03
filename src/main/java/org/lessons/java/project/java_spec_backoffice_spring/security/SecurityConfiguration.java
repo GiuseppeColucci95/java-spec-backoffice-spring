@@ -11,7 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // serve a dire a Spring che deve usare questa configurazione per tutte le
+                   // richieste web security
 public class SecurityConfiguration {
 
   @Bean
